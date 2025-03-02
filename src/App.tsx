@@ -3,7 +3,7 @@ import "./App.css";
 
 // ------------------ Custom Name Helper Functions ------------------
 
-function getMonsterName(card) {
+function getMonsterName(card: { rank: string; value: number }): string {
   if (card.rank === "J") return "Jack";
   if (card.rank === "Q") return "Queen";
   if (card.rank === "K") return "King";
@@ -30,7 +30,7 @@ function getPotionName(card) {
 }
 
 // ------------------ Image Dictionaries ------------------
-const monsterImages = {
+const monsterImages: Record<string, string> = {
   Goblin2_spades: "/images/monsters/goblin2_spades.png",
   Goblin2_clubs: "/images/monsters/goblin2_clubs.png",
   Wolf3_spades: "/images/monsters/wolf3_spades.png",
@@ -57,7 +57,7 @@ const monsterImages = {
   King_clubs: "/images/monsters/king_clubs.png",
 };
 
-const weaponImages = {
+const weaponImages: Record<number, string> = {
   2: "/images/weapons/dagger2.png",
   3: "/images/weapons/dagger3.png",
   4: "/images/weapons/shortsword4.png",
@@ -99,15 +99,15 @@ function getMonsterImage(card) {
   return monsterImages[key] || "/images/monsters/default.png";
 }
 
-function getWeaponImage(card) {
+function getWeaponImage(card: { value: number }): string {
   return weaponImages[card.value] || "/images/weapons/default.png";
 }
 
-function getPotionImage(card) {
+function getPotionImage(card: { value: number }): string {
   return potionImages[card.value] || "/images/potions/default.png";
 }
 
-function getCardImage(card) {
+function getCardImage(card: { type: string; value: number; rank?: string; suit?: string }): string {
   if (card.type === "monster") return getMonsterImage(card);
   if (card.type === "weapon") return getWeaponImage(card);
   if (card.type === "potion") return getPotionImage(card);
@@ -192,11 +192,11 @@ function shuffleDeck(deck) {
 // ------------------ Main App Component ------------------
 
 export default function App() {
-  const [deck, setDeck] = useState([]);
+  const [deck, setDeck] = useState<{ id: number; suit: string; rank: string; value: number; type: string }[]>([]);
   const [room, setRoom] = useState([]);
   const [currentHP, setCurrentHP] = useState(20);
   const [maxHealth, setMaxHealth] = useState(20);
-  const [equippedWeapon, setEquippedWeapon] = useState(null);
+  const [equippedWeapon, setEquippedWeapon] = useState<{ id: number; suit: string; rank: string; value: number; type: string } | null>(null);
   const [turnActionCount, setTurnActionCount] = useState(0);
   const [usedPotionThisTurn, setUsedPotionThisTurn] = useState(false);
   const [lastAction, setLastAction] = useState(null);
@@ -307,7 +307,7 @@ export default function App() {
     maxHealth,
   ]);
 
-  function refillRoom(leftover, currentDeck) {
+  function refillRoom(leftover: { id: number; suit: string; rank: string; value: number; type: string }[], currentDeck: { id: number; suit: string; rank: string; value: number; type: string }[]) {
     const needed = 4 - leftover.length;
     const newCards = currentDeck.slice(0, needed);
     setRoom([...leftover, ...newCards]);
@@ -340,7 +340,7 @@ export default function App() {
     setFleeUsed(true);
   }
 
-  function handleCardClick(cardIndex) {
+  function handleCardClick(cardIndex: number) {
     if (gameOver) return;
     setIsFirstRoom(false);
     const card = room[cardIndex];
@@ -381,7 +381,7 @@ export default function App() {
     });
   }
 
-  function processMonsterFight(choice, card, index) {
+  function processMonsterFight(choice: string, card: { id: number; suit: string; rank: string; value: number; type: string }, index: number) {
     setIsFirstRoom(false);
     let newHP = currentHP;
     let msg = "";
