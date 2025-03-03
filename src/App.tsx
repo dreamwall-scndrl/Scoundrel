@@ -562,22 +562,27 @@ export default function App() {
             backgroundSize: "cover",
           }}
         >
-          {/* Top Status Bar */}
-          <div
-            className="flex items-center justify-center h-8"
-            style={{ backgroundColor: "#301706", fontFamily: "Astloch-Bold" }}
-          >
-            <p className="text-white text-sm text-center">
-              {message || "SCOUNDREL"}
-            </p>
-            <img
-              src="/images/icons/settings.png"
-              alt="Settings"
-              className="w-6 h-6 cursor-pointer absolute right-4 top-2"
-              onClick={() => setShowSettings(true)}
-              style={{ filter: "invert(1)" }}
-            />
-          </div>
+{/* Top Status Bar */}
+<div className="flex items-center justify-center h-8 relative" style={{ backgroundColor: "#301706" }}>
+  {/* "SCOUNDREL" on the left with Astloch-Bold */}
+  <p className="text-white absolute left-4"
+     style={{ fontFamily: "Astloch-Bold", fontSize: "20px", letterSpacing: "2px" }}>
+    SCOUNDREL
+  </p>
+  {/* Status messages in the middle with SpaceGrotesk */}
+  <p className="text-white text-sm text-center"
+     style={{ fontFamily: "SpaceGrotesk-VariableFont_wght" }}>
+    {message}
+  </p>
+  {/* Settings Icon */}
+  <img
+    src="/images/icons/settings.png"
+    alt="Settings"
+    className="w-6 h-6 cursor-pointer absolute right-4 top-2"
+    onClick={() => setShowSettings(true)}
+    style={{ filter: "invert(1)" }}
+  />
+</div>
 
           {/* Main Bottom Panel Content: 3 Columns */}
           <div className="flex justify-around items-center w-full px-4 py-2">
