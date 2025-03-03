@@ -565,9 +565,11 @@ export default function App() {
           {/* Top Status Bar */}
           <div
             className="flex items-center justify-center h-8"
-            style={{ backgroundColor: "#301706" }}
+            style={{ backgroundColor: "#301706", fontFamily: "Astloch-Bold" }}
           >
-            <p className="text-white text-sm text-center">{message}</p>
+            <p className="text-white text-sm text-center">
+              {message || "SCOUNDREL"}
+            </p>
             <img
               src="/images/icons/settings.png"
               alt="Settings"
