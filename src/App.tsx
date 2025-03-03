@@ -564,10 +564,10 @@ export default function App() {
         >
 {/* Top Status Bar */}
 <div className="flex items-center justify-center h-8" style={{ backgroundColor: "#301706" }}>
-  <p className="text-white text-sm text-center"
+  <p className="text-white text-center"
      style={{
        fontFamily: message === "" ? "Astloch-Bold" : "SpaceGrotesk-VariableFont_wght",
-       fontSize: "20px",
+       fontSize: message === "" ? "20px" : "14px", // Μεγαλύτερο για "Scoundrel", μικρότερο για status updates
        letterSpacing: "2px"
      }}>
     {message === "" ? "Scoundrel" : message}
