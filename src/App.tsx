@@ -563,16 +563,14 @@ export default function App() {
           }}
         >
 {/* Top Status Bar */}
-<div className="flex items-center justify-center h-8 relative" style={{ backgroundColor: "#301706" }}>
-  {/* "SCOUNDREL" on the left with Astloch-Bold */}
-  <p className="text-white absolute left-4"
-     style={{ fontFamily: "Astloch-Bold", fontSize: "20px", letterSpacing: "2px" }}>
-    SCOUNDREL
-  </p>
-  {/* Status messages in the middle with SpaceGrotesk */}
+<div className="flex items-center justify-center h-8" style={{ backgroundColor: "#301706" }}>
   <p className="text-white text-sm text-center"
-     style={{ fontFamily: "SpaceGrotesk-VariableFont_wght" }}>
-    {message}
+     style={{
+       fontFamily: message === "" ? "Astloch-Bold" : "SpaceGrotesk-VariableFont_wght",
+       fontSize: "20px",
+       letterSpacing: "2px"
+     }}>
+    {message === "" ? "Scoundrel" : message}
   </p>
   {/* Settings Icon */}
   <img
